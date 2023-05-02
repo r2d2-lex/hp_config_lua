@@ -1,0 +1,3 @@
+HW_ADDRESS = '192.168.1.1'
+USERNAME = 'admin'
+PASSWORD = 'admin'
