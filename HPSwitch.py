@@ -3,7 +3,7 @@ import logging
 import requests
 import config
 
-logging.basicConfig(level=logging.DEBUG)
+logging.basicConfig(level=logging.INFO)
 
 
 class HPSwitch:
@@ -42,6 +42,7 @@ class HPSwitch:
         if self.session:
             self.session.trust_env = False
             self.login_session = self.login()
+            return self
 
     def __exit__(self, exc_type, exc_val, exc_tb):
         if self.login_session:
@@ -127,7 +128,7 @@ if __name__ == "__main__":
                   ) as switch:
         status = switch.upload_to_tftp()
         if status:
-            message = f'Success upload config {config_name} on {config.TFTP_ADDRESS}'
+            message = f'Success upload config {config_name} on {config.TFTP_SERVER}'
         else:
-            message = f'Error upload config {config_name} on {config.TFTP_ADDRESS}'
-        print(message)
+            message = f'Error upload config {config_name} on {config.TFTP_SERVER}'
+        logging.info(message)
